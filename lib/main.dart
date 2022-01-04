@@ -15,38 +15,56 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.red,
       ),
-      home: const MyHomePage(title: 'Dicee'),
+      home: const DicePage(),
     );
   }
 }
 
-class MyHomePage extends StatelessWidget {
-  final String title;
+class DicePage extends StatefulWidget {
+  const DicePage({Key? key}) : super(key: key);
 
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
+  @override
+  _DicePageState createState() => _DicePageState();
+}
+
+class _DicePageState extends State<DicePage> {
+  int leftDiceNumber = 1;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(title),
+        title: const Text('Dicee'),
+        backgroundColor: Colors.red[600],
         elevation: 0,
       ),
       body: Container(
-        color: Colors.red,
+        color: Colors.red[600],
         child: Center(
           child: Row(
             children: [
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Image.asset('images/dice1.png'),
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextButton(
+                    onPressed: () {
+                      setState(() {
+                        leftDiceNumber = 5;
+                      });
+                    },
+                    child: Image.asset('images/dice$leftDiceNumber.png'),
+                  ),
                 ),
               ),
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Image.asset('images/dice1.png'),
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextButton(
+                    onPressed: () {
+                      print('Right button got presses!');
+                    },
+                    child: Image.asset('images/dice1.png'),
+                  ),
                 ),
               ),
             ],
